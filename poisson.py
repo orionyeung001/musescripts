@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np, uproot
 import logging, sys
 import os
-from root_reader import *
+from root_reader import get_data
 import pandas as pd
 
 
