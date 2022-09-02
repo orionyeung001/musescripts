@@ -89,7 +89,10 @@ logging.basicConfig(stream=sys.stderr, level=logging.CRITICAL) # only shows crit
 
 df = process()
 df = df.loc[df['ratio'] > 0, df.columns].sort_values(['rate', 'run'])
+df['log_ratio'] = df.ratio.map(lambda r: np.log10(r))
+df['log_beamrate'] = df.rate.map(lambda r: np.log10(r))
 print(df)
 df.to_csv('txt/repeat_hit_ratios_df.csv')
-# print(df.filter(regex='^Ch16.*fall$', axis=1))
-# generate plots as needed from output_data
+df.plot.hexbin(x='log_beamrate', y='log_ratio', gridsize=20)
+plt.title('Rate of observed repeat edges of same type')
+plt.show()
